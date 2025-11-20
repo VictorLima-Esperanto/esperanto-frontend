@@ -22,7 +22,19 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Path alias */
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@/stores/*": ["stores/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/services/*": ["services/*"],
+      "@/pages/*": ["pages/*"],
+      "@/components/*": ["components/*"],
+      "@/config/*": ["config/*"]
+    }
   },
   "include": ["src"]
 }
