@@ -4,10 +4,10 @@ import { useUserStore } from '@/stores/Auth/useUserStore';
 import { jwtDecode } from 'jwt-decode';
 
 interface TokenPayload {
-  sub: string;
+  id: number;
   name: string;
   email: string;
-  role?: string;
+  role: string;
 }
 
 export default function Callback() {
@@ -33,10 +33,10 @@ export default function Callback() {
 
       setUser(
         {
-          id: payload.sub,
+          id: payload.id,
           name: payload.name,
           email: payload.email,
-          role: 'student', // você pode pegar do token se tiver
+          role: payload.role,
         },
         token,
       );

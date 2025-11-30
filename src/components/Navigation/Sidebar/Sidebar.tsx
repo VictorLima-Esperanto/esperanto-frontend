@@ -1,7 +1,6 @@
 import { Menu, Layout, Typography, Avatar, Dropdown, Space } from 'antd';
 import {
   HomeOutlined,
-  BookOutlined,
   VideoCameraOutlined,
   UserOutlined,
   SettingOutlined,
@@ -68,26 +67,27 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         defaultSelectedKeys={['/student/home']}
         onClick={({ key }) => handleMenuClick(key)}
       >
-        {/* Portal Aluno */}
-        <SubMenu key="aluno" icon={<HomeOutlined />} title="Portal Aluno">
-          <Menu.Item key="/student/home">Home</Menu.Item>
-          <Menu.Item key="/courses">Meus Cursos</Menu.Item>
-          <Menu.Item key="/modules">Módulos</Menu.Item>
-        </SubMenu>
+        {(user?.role === 'Admin' || user?.role === 'Student') && (
+          <SubMenu key="aluno" icon={<HomeOutlined />} title="Portal Aluno">
+            <Menu.Item key="/student/home">Home</Menu.Item>
+            <Menu.Item key="/courses">Meus Cursos</Menu.Item>
+            <Menu.Item key="/modules">Módulos</Menu.Item>
+          </SubMenu>
+        )}
 
-        {/* Portal Professor */}
-        <SubMenu
-          key="professor"
-          icon={<VideoCameraOutlined />}
-          title="Portal Professor"
-        >
-          <Menu.Item key="/teacher/home">Home</Menu.Item>
-          <Menu.Item key="/teacher/courses">Cursos</Menu.Item>
-          <Menu.Item key="/teacher/modules">Módulos</Menu.Item>
-        </SubMenu>
+        {(user?.role === 'Admin' || user?.role === 'Teacher') && (
+          <SubMenu
+            key="professor"
+            icon={<VideoCameraOutlined />}
+            title="Portal Professor"
+          >
+            <Menu.Item key="/teacher/home">Home</Menu.Item>
+            <Menu.Item key="/teacher/courses">Cursos</Menu.Item>
+            <Menu.Item key="/teacher/modules">Módulos</Menu.Item>
+          </SubMenu>
+        )}
 
-        {/* Seção Admin */}
-        {user?.role === 'admin' && (
+        {user?.role === 'Admin' && (
           <SubMenu key="admin" icon={<SettingOutlined />} title="Admin">
             <Menu.Item key="/admin/courses" icon={<AppstoreAddOutlined />}>
               Criar Cursos
