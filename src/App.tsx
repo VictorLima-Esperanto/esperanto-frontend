@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "@/pages/Auth/Login/Login";
-import { AuthProvider } from "@/contexts/Auth/AuthContext";
-import HomeStudent from "./pages/Home/Home";
-import Callback from "./pages/Auth/Callback/Callback";
-import MainLayout from "./Layouts/MainLayout/MainLayout";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from '@/pages/Auth/Login/Login';
+import { AuthProvider } from '@/contexts/Auth/AuthContext';
+import Callback from './pages/Auth/Callback/Callback';
+import MainLayout from './Layouts/MainLayout/MainLayout';
+import { PrivateRoute } from './routes/PrivateRoute';
+import HomeStudent from './pages/Student/Home/HomeStudent';
 
 export default function App() {
   return (
@@ -15,11 +16,13 @@ export default function App() {
           <Route
             path="/*"
             element={
-              <MainLayout>
-                <Routes>
-                  <Route path="home" element={<HomeStudent />} />
-                </Routes>
-              </MainLayout>
+              <PrivateRoute>
+                <MainLayout>
+                  <Routes>
+                    <Route path="/student/home" element={<HomeStudent />} />
+                  </Routes>
+                </MainLayout>
+              </PrivateRoute>
             }
           />
         </Routes>

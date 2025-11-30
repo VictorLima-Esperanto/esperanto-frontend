@@ -1,4 +1,4 @@
-import { Menu, Layout, Typography, Avatar, Dropdown, Space } from "antd";
+import { Menu, Layout, Typography, Avatar, Dropdown, Space } from 'antd';
 import {
   HomeOutlined,
   BookOutlined,
@@ -6,19 +6,22 @@ import {
   UserOutlined,
   SettingOutlined,
   DownOutlined,
-} from "@ant-design/icons";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/Auth/AuthContext";
-import "./Sidebar.css";
+  AppstoreAddOutlined,
+  FileTextOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/Auth/AuthContext';
+import './Sidebar.css';
+import type { SidebarProps } from '@/types/components/SidebarTypes';
 
 const { Sider } = Layout;
-const { Title, Text } = Typography;
+const { Text } = Typography;
+const { SubMenu } = Menu;
 
-export default function Sidebar() {
+export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const [collapsed, setCollapsed] = useState(false);
 
   const handleMenuClick = (key: string) => {
     navigate(key);
@@ -26,10 +29,10 @@ export default function Sidebar() {
 
   const profileMenu = (
     <Menu>
-      <Menu.Item key="profile" onClick={() => navigate("/profile")}>
+      <Menu.Item key="profile" onClick={() => navigate('/profile')}>
         Perfil
       </Menu.Item>
-      <Menu.Item key="settings" onClick={() => navigate("/settings")}>
+      <Menu.Item key="settings" onClick={() => navigate('/settings')}>
         Configurações
       </Menu.Item>
       <Menu.Item key="logout" onClick={logout}>
@@ -44,17 +47,17 @@ export default function Sidebar() {
       collapsed={collapsed}
       onCollapse={setCollapsed}
       width={250}
-      className="sidebar"
+      collapsedWidth={80}
     >
       <div className="sidebar-user">
-        <Dropdown overlay={profileMenu} trigger={["click"]}>
+        <Dropdown overlay={profileMenu} trigger={['click']}>
           <Space>
             <Avatar
-              style={{ backgroundColor: "#1677ff" }}
+              style={{ backgroundColor: '#1677ff' }}
               icon={<UserOutlined />}
             />
-            {!collapsed && <Text style={{ color: "#fff" }}>{user?.name}</Text>}
-            {!collapsed && <DownOutlined style={{ color: "#fff" }} />}
+            {!collapsed && <Text style={{ color: '#fff' }}>{user?.name}</Text>}
+            {!collapsed && <DownOutlined style={{ color: '#fff' }} />}
           </Space>
         </Dropdown>
       </div>
@@ -62,21 +65,44 @@ export default function Sidebar() {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["/home"]}
+        defaultSelectedKeys={['/student/home']}
         onClick={({ key }) => handleMenuClick(key)}
       >
-        <Menu.Item key="/home" icon={<HomeOutlined />}>
-          Home
-        </Menu.Item>
-        <Menu.Item key="/courses" icon={<BookOutlined />}>
-          Meus Cursos
-        </Menu.Item>
-        <Menu.Item key="/modules" icon={<VideoCameraOutlined />}>
-          Módulos
-        </Menu.Item>
-        <Menu.Item key="/settings" icon={<SettingOutlined />}>
-          Configurações
-        </Menu.Item>
+        {/* Portal Aluno */}
+        <SubMenu key="aluno" icon={<HomeOutlined />} title="Portal Aluno">
+          <Menu.Item key="/student/home">Home</Menu.Item>
+          <Menu.Item key="/courses">Meus Cursos</Menu.Item>
+          <Menu.Item key="/modules">Módulos</Menu.Item>
+        </SubMenu>
+
+        {/* Portal Professor */}
+        <SubMenu
+          key="professor"
+          icon={<VideoCameraOutlined />}
+          title="Portal Professor"
+        >
+          <Menu.Item key="/teacher/home">Home</Menu.Item>
+          <Menu.Item key="/teacher/courses">Cursos</Menu.Item>
+          <Menu.Item key="/teacher/modules">Módulos</Menu.Item>
+        </SubMenu>
+
+        {/* Seção Admin */}
+        {user?.role === 'admin' && (
+          <SubMenu key="admin" icon={<SettingOutlined />} title="Admin">
+            <Menu.Item key="/admin/courses" icon={<AppstoreAddOutlined />}>
+              Criar Cursos
+            </Menu.Item>
+            <Menu.Item key="/admin/plans" icon={<FileTextOutlined />}>
+              Criar Planos
+            </Menu.Item>
+            <Menu.Item key="/admin/reports" icon={<FileTextOutlined />}>
+              Relatórios
+            </Menu.Item>
+            <Menu.Item key="/admin/users" icon={<TeamOutlined />}>
+              Gestão de Usuários
+            </Menu.Item>
+          </SubMenu>
+        )}
       </Menu>
     </Sider>
   );

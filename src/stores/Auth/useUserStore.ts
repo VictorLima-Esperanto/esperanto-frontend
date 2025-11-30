@@ -1,19 +1,6 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: "student" | "teacher" | "admin";
-}
-
-interface UserState {
-  user: User | null;
-  token: string | null;
-  setUser: (user: User, token: string) => void;
-  clearUser: () => void;
-}
+import type { UserState } from '@/types/store/UserStore';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const useUserStore = create<UserState>()(
   persist<UserState>(
@@ -24,7 +11,7 @@ export const useUserStore = create<UserState>()(
       clearUser: () => set({ user: null, token: null }),
     }),
     {
-      name: "user-storage",
-    }
-  )
+      name: 'user-storage',
+    },
+  ),
 );

@@ -1,7 +1,7 @@
-import { Button, Card, Form, Input, Typography } from "antd";
-import { LockOutlined, MailOutlined, GoogleOutlined } from "@ant-design/icons";
-import "./Login.css";
-import { useAuth } from "@/contexts/Auth/AuthContext.ts";
+import { Button, Card, Form, Input, Typography } from 'antd';
+import { LockOutlined, MailOutlined, GoogleOutlined } from '@ant-design/icons';
+import './Login.css';
+import { useAuth } from '@/contexts/Auth/AuthContext.ts';
 
 const { Title, Text } = Typography;
 
@@ -9,14 +9,14 @@ export default function Login() {
   const { externalLogin, login, loading } = useAuth();
 
   const handleGoogleLogin = () => {
-    externalLogin("Google");
+    externalLogin('Google');
   };
 
   const onFinish = async (values: any) => {
     try {
       await login(values.email, values.password);
     } catch (error) {
-      console.error("Erro no login:", error);
+      console.error('Erro no login:', error);
     }
   };
 
@@ -24,7 +24,7 @@ export default function Login() {
     <div className="login-container">
       <Card className="login-card" bordered={false}>
         <div className="login-header">
-          <Title level={2} style={{ color: "#1677ff", marginBottom: 0 }}>
+          <Title level={2} style={{ color: '#1677ff', marginBottom: 0 }}>
             Esperanto Idiomas
           </Title>
           <Text type="secondary">Acesse sua conta para continuar</Text>
@@ -41,7 +41,7 @@ export default function Login() {
             name="email"
             label="E-mail"
             rules={[
-              { required: true, message: "Por favor, insira seu e-mail" },
+              { required: true, message: 'Por favor, insira seu e-mail' },
             ]}
           >
             <Input
@@ -54,7 +54,7 @@ export default function Login() {
           <Form.Item
             name="password"
             label="Senha"
-            rules={[{ required: true, message: "Por favor, insira sua senha" }]}
+            rules={[{ required: true, message: 'Por favor, insira sua senha' }]}
           >
             <Input.Password
               size="large"
@@ -69,7 +69,7 @@ export default function Login() {
               htmlType="submit"
               size="large"
               block
-              style={{ background: "#1677ff" }}
+              style={{ background: '#1677ff' }}
               loading={loading}
             >
               Entrar

@@ -1,32 +1,32 @@
 .sidebar {
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: #001529;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #001529;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-header {
-    padding: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-user {
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar .ant-menu-item-selected {
-    background-color: #1677ff !important;
+  background-color: #1677ff !important;
 }
 
 .sidebar .ant-menu-item:hover {
-    background-color: #1890ff !important;
+  background-color: #1890ff !important;
 }

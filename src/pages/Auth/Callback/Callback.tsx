@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUserStore } from "@/stores/Auth/useUserStore";
-import { jwtDecode } from "jwt-decode";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '@/stores/Auth/useUserStore';
+import { jwtDecode } from 'jwt-decode';
 
 interface TokenPayload {
-  sub: string; // id do usuário
-  name: string; // nome do usuário
-  email: string; // e-mail do usuário
-  role?: string; // caso você adicione role no token
+  sub: string;
+  name: string;
+  email: string;
+  role?: string;
 }
 
 export default function Callback() {
@@ -16,18 +16,18 @@ export default function Callback() {
 
   useEffect(() => {
     const handleCallback = () => {
-      const existingToken = localStorage.getItem("token");
+      const existingToken = localStorage.getItem('token');
       if (existingToken) {
-        navigate("/home");
+        navigate('/student/home');
         return;
       }
 
       const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
+      const token = params.get('token');
 
-      if (!token) return navigate("/");
+      if (!token) return navigate('/');
 
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
 
       const payload: TokenPayload = jwtDecode(token);
 
@@ -36,12 +36,12 @@ export default function Callback() {
           id: payload.sub,
           name: payload.name,
           email: payload.email,
-          role: "student", // você pode pegar do token se tiver
+          role: 'student', // você pode pegar do token se tiver
         },
-        token
+        token,
       );
 
-      navigate("/home");
+      navigate('/student/home');
     };
 
     handleCallback();

@@ -1,0 +1,16 @@
+.chat-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #1677ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  cursor: pointer;
+}
+.chat-button:hover { transform: translateY(-2px); }

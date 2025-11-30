@@ -1,11 +1,13 @@
-.ant-layout {
-    min-height: 100vh;
-    background: #f0f2f5;
+/* MainLayout.css */
+.main-layout {
+  height: 100vh;
 }
 
-.ant-layout-content {
-    background: #fff;
-    padding: 24px;
-    margin: 0;
-    min-height: 100vh;
+.main-content {
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+.content-area {
+  padding: 0 24px;
 }
